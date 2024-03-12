@@ -1,7 +1,16 @@
 "use client"; // This is a client component 👈🏽
 import { createSlice, nanoid, current } from "@reduxjs/toolkit";
 import { eventList } from "../components/Data";
-const initialState = typeof window !== 'undefined' ? JSON.parse(localStorage.getItem("eventData")) : null
+// const initialState = typeof window !== 'undefined' ? JSON.parse(localStorage.getItem("eventData")) : null
+let initialState;
+
+if (typeof window !== "undefined") {
+  const localStorageData = localStorage.getItem("eventData");
+  initialState = localStorageData ? JSON.parse(localStorageData) : [];
+} else {
+  initialState = [];
+}
+
 const eventSlice = createSlice({
   name: "events",
   initialState,
