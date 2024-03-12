@@ -33,7 +33,7 @@ export const  OptionData = [
     {title:"Calendar Type",img:calendarIcon},
 ]
 
-export const tableHead = ["DONOR","PANELS","BARCODE","SOURCE","DATE","AMOUNT($)","OBSERVER BY","STATUS","ACTION"];
+export const tableHead = ["DONOR","PANELS","BARCODE","SOURCE","DATE","AMOUNT","OBSERVER","STATUS","ACTION"];
 
 
 export const tableInfo = [

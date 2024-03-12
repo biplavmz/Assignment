@@ -41,11 +41,30 @@ const DataTable = () => {
   const [inputValues, setInputValues] = useState<Record<string, string>>({});
 
   const handleInputChange = (e: any, fieldName: string) => {
-    setInputValues((prevState) => ({
-      ...prevState,
-      [fieldName]: e.target.value,
-    }));
-  };
+
+    if(fieldName == "AMOUNT" || fieldName==="BARCODE"){
+      const amountValue = parseFloat(e.target.value);
+      if (isNaN(amountValue)) {
+        // Handle the case where the input is not a valid number
+        alert("Please enter a valid number for amount.");
+        return;
+      }setInputValues((prevState) => ({
+        ...prevState,
+        [fieldName]: e.target.value,
+      }))
+      
+      
+    }
+    
+    else{
+
+      setInputValues((prevState) => ({
+        ...prevState,
+        [fieldName]: e.target.value,
+      }));
+    };
+    }
+    
 
   const showModal = () => {
     setIsModalOpen(true);
@@ -53,6 +72,15 @@ const DataTable = () => {
 
   const handleOk = (event: any) => {
     event.preventDefault();
+    if (!inputValues.BARCODE || inputValues.BARCODE.trim() === "") {
+      alert("BARCODE field is required and cannot be empty.");
+      return;
+  }
+  const barcodeExists = users?.some((userInfo:any) => userInfo.BARCODE === inputValues.BARCODE);
+    if (barcodeExists) {
+        alert("BARCODE value already exists");
+        return;
+    }
     dispatch(addUsers(inputValues));
 
     setIsModalOpen(false);

@@ -7,16 +7,29 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { tableInfo } from "../components/Data";
 
-const initialState = typeof window !== 'undefined' ? JSON.parse(localStorage.getItem("usersData")) : null 
+// const initialState = typeof window !== 'undefined' ? JSON.parse(localStorage.getItem("usersData")) : [] 
+let initialState;
+
+if (typeof window !== 'undefined') {
+    const localStorageData = localStorage.getItem("usersData");
+    initialState = localStorageData ? JSON.parse(localStorageData) : [];
+} else {
+    initialState = [];
+}
 
 const userSlice = createSlice({
   name: "users",
   initialState,
   reducers: {
     addUsers: (state, action) => {
-      state.push(action.payload);
-      let userData = JSON.stringify(current(state));
-      localStorage.setItem("usersData", userData);
+      if(action.payload){
+        // const newState = [...state, action.payload];
+        state.push(action.payload);
+        let userData = JSON.stringify(current(state));
+        localStorage.setItem("usersData", userData);
+        // return newState;
+      }
+      // return state;
     },
     updateUser: (state, action) => {
       const {

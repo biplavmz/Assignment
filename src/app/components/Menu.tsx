@@ -62,7 +62,7 @@ const Menu = () => {
 
           <div>
             {ImageData.map((item) => (
-              <div className="flex justify-center">
+              <div className="flex justify-center w-20">
                 <Image
                   src={item}
                   alt="Vercel Logo"
@@ -119,7 +119,7 @@ const Menu = () => {
           )}
         </div>
 
-        <div className={`${!isOpen ? "ml-56" : ""}`}>
+        <div className={`${!isOpen ? "ml-2 sm:ml-4 md:ml-8 lg:ml-12 xl:ml-16" : ""}`}>
           {menu == "Calendar Type" ? <Calender /> : <DataTable />}
         </div>
       </div>
